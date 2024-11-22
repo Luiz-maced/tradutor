@@ -13,7 +13,13 @@
 
         <img src="{{ url_for('static', filename='creepytradutor.png') }}" alt="CreepyTradutor">
         <form method="POST">
-            <textarea name="text" placeholder="Digite o texto em inglês..."></textarea><br>
+            <textarea name="text" placeholder="Seu texto aqui"></textarea><br>
+            <label for="source_language">Quer traduzir de qual idioma?</label><br>
+            <select name="source_language">
+                <option value="en">Inglês</option>
+                <option value="fr">Francês</option>
+                <option value="es">Espanhol</option>
+            </select><br><br>
             <button type="submit">Traduzir</button>
             <a href="https://wa.me/5511946691016?text=Olá!%20Preciso%20de%20ajuda.">
                 <button type="button">Sugestões e Suporte</button>
@@ -29,69 +35,31 @@
             <p>{{ translation }}</p>
             <form method="POST" action="/download">
                 <input type="hidden" name="translated_text" value="{{ translation }}">
-                <button type="submit">Baixar Tradução</button>
+                <button type="submit" class="button">
+                    <span class="button__text">NotePad</span>
+                    <span class="button__icon"><svg class="svg" data-name="Layer 2" id="bdd05811-e15d-428c-bb53-8661459f9307" viewBox="0 0 35 35" xmlns="http://www.w3.org/2000/svg"><path d="M17.5,22.131a1.249,1.249,0,0,1-1.25-1.25V2.187a1.25,1.25,0,0,1,2.5,0V20.881A1.25,1.25,0,0,1,17.5,22.131Z"></path><path d="M17.5,22.693a3.189,3.189,0,0,1-2.262-.936L8.487,15.006a1.249,1.249,0,0,1,1.767-1.767l6.751,6.751a.7.7,0,0,0,.99,0l6.751-6.751a1.25,1.25,0,0,1,1.768,1.767l-6.752,6.751A3.191,3.191,0,0,1,17.5,22.693Z"></path><path d="M31.436,34.063H3.564A3.318,3.318,0,0,1,.25,30.749V22.011a1.25,1.25,0,0,1,2.5,0v8.738a.815.815,0,0,0,.814.814H31.436a.815.815,0,0,0,.814-.814V22.011a1.25,1.25,0,1,1,2.5,0v8.738A3.318,3.318,0,0,1,31.436,34.063Z"></path></svg></span>
+                  </button>
+            </form>
+
+            <form method="POST" action="/downloadDocx">
+                <input type="hidden" name="translated_text" value="{{ translation }}">
+                <button type="submit" class="button">
+                    <span class="button__text">Docx</span>
+                    <span class="button__icon"><svg class="svg" data-name="Layer 2" id="bdd05811-e15d-428c-bb53-8661459f9307" viewBox="0 0 35 35" xmlns="http://www.w3.org/2000/svg"><path d="M17.5,22.131a1.249,1.249,0,0,1-1.25-1.25V2.187a1.25,1.25,0,0,1,2.5,0V20.881A1.25,1.25,0,0,1,17.5,22.131Z"></path><path d="M17.5,22.693a3.189,3.189,0,0,1-2.262-.936L8.487,15.006a1.249,1.249,0,0,1,1.767-1.767l6.751,6.751a.7.7,0,0,0,.99,0l6.751-6.751a1.25,1.25,0,0,1,1.768,1.767l-6.752,6.751A3.191,3.191,0,0,1,17.5,22.693Z"></path><path d="M31.436,34.063H3.564A3.318,3.318,0,0,1,.25,30.749V22.011a1.25,1.25,0,0,1,2.5,0v8.738a.815.815,0,0,0,.814.814H31.436a.815.815,0,0,0,.814-.814V22.011a1.25,1.25,0,1,1,2.5,0v8.738A3.318,3.318,0,0,1,31.436,34.063Z"></path></svg></span>
+                  </button>
+            </form>
+
+            <form method="POST" action="/downloadPDF">
+                <input type="hidden" name="translated_text" value="{{ translation }}">
+                <button type="submit" class="button">
+                    <span class="button__text">PDF</span>
+                    <span class="button__icon"><svg class="svg" data-name="Layer 2" id="bdd05811-e15d-428c-bb53-8661459f9307" viewBox="0 0 35 35" xmlns="http://www.w3.org/2000/svg"><path d="M17.5,22.131a1.249,1.249,0,0,1-1.25-1.25V2.187a1.25,1.25,0,0,1,2.5,0V20.881A1.25,1.25,0,0,1,17.5,22.131Z"></path><path d="M17.5,22.693a3.189,3.189,0,0,1-2.262-.936L8.487,15.006a1.249,1.249,0,0,1,1.767-1.767l6.751,6.751a.7.7,0,0,0,.99,0l6.751-6.751a1.25,1.25,0,0,1,1.768,1.767l-6.752,6.751A3.191,3.191,0,0,1,17.5,22.693Z"></path><path d="M31.436,34.063H3.564A3.318,3.318,0,0,1,.25,30.749V22.011a1.25,1.25,0,0,1,2.5,0v8.738a.815.815,0,0,0,.814.814H31.436a.815.815,0,0,0,.814-.814V22.011a1.25,1.25,0,1,1,2.5,0v8.738A3.318,3.318,0,0,1,31.436,34.063Z"></path></svg></span>
+                  </button>
             </form>
         </div>
         {% endif %}
-    </div>
 
-    <button onclick="openModal()">Termos de Uso</button>
-</footer>
-
-<!-- Modal de Termos de Uso -->
-<div id="termsModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>Termos de Uso</h2>
-        </div>
-        <div class="modal-body">
-            <p>Ao utilizar o Tradutor de Creepypasta, você concorda com os seguintes Termos de Uso. Leia atentamente antes de prosseguir.
-                2. Precisão e Limitações
-                O Tradutor de Creepypasta não garante a precisão completa das traduções. Podem ocorrer erros e traduções imprecisas.
-                O conteúdo traduzido é gerado automaticamente e pode não capturar nuances, expressões idiomáticas ou outros contextos culturais do texto original.
-                3. Propriedade Intelectual
-                O usuário garante que possui os direitos necessários para submeter o conteúdo para tradução ou que tem permissão do detentor dos direitos autorais.
-                O Tradutor de Creepypasta não assume responsabilidade por infrações de direitos autorais relacionadas ao conteúdo enviado para tradução.
-                4. Uso Apropriado
-                O serviço não deve ser usado para traduzir ou disseminar conteúdo ilegal, ofensivo ou que viole direitos de terceiros.
-                O uso do tradutor implica a aceitação de que o serviço é fornecido "como está" e para uso pessoal e não comercial.
-                5. Privacidade e Dados Pessoais
-                Não armazenamos permanentemente os textos enviados para tradução. No entanto, dados temporários podem ser utilizados para processar a tradução solicitada.
-                Não nos responsabilizamos pela privacidade dos dados enviados por meio deste serviço.
-                6. Isenção de Responsabilidade
-                O Tradutor de Creepypasta não se responsabiliza por quaisquer danos diretos, indiretos, incidentais, ou consequentes resultantes do uso ou da incapacidade de uso do serviço.
-                Não garantimos a disponibilidade contínua e ininterrupta do serviço e nos reservamos o direito de modificar ou descontinuar o serviço a qualquer momento.
-                7. Alterações nos Termos de Uso
-                Estes Termos de Uso podem ser atualizados periodicamente. A versão atualizada será publicada neste site e recomendamos revisitar esta página para estar informado de eventuais mudanças.
-                Ao clicar em "Aceito", você confirma que leu, entendeu e concorda com os Termos de Uso descritos acima.</p>
-            <!-- Adicione mais texto aqui conforme necessário -->
-            <label>
-                <input type="checkbox" id="acceptTerms"> Eu aceito os Termos de Uso
-            </label>
-        </div>
-        <div class="modal-footer">
-            <button onclick="closeModal()">Fechar</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Função para abrir o modal
-    function openModal() {
-        document.getElementById("termsModal").style.display = "flex";
-    }
-
-    // Função para fechar o modal
-    function closeModal() {
-        const checkbox = document.getElementById("acceptTerms");
-        if (checkbox.checked) {
-            document.getElementById("termsModal").style.display = "none";
-        } else {
-            alert("Você deve aceitar os Termos de Uso para continuar.");
-        }
-    }
-</script>
-
+    
     <footer>
         <p>&copy; 2024 LuizMacedo. Todos os direitos reservados.</p>
     </footer>
