@@ -1,0 +1,1 @@
+Tradutor criado usando Flask
